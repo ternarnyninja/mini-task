@@ -92,7 +92,7 @@ function checkOpiton() {
 
     case "Дун-Дин":
       setInfo(tea, select.value);
-      calculateCost(tea, select.value);
+      calculateCost(tea, select.value, add);
       break;
 
     case "Шен-пуэр": 
@@ -110,7 +110,13 @@ function checkOpiton() {
 
 }
 
-function calculateCost(array, teaPos) {
+
+function calculateCost(array, teaPos, cal) {
   let itemPrice = array.filter(el => el.name === teaPos);
   let price = itemPrice.map(item => item.price).join("");
+  cal(price);
 }
+
+
+
+
