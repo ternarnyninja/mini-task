@@ -86,21 +86,23 @@ let total = {};
 
 function checkOpiton() {
   setInfo(TEA_DATA, SELECTOR.value);
-  getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
+  // getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
 };
 
 function getGramsFromTeaCard(teaCard, teaCardOption) {
   const takeCard = teaCard.filter(card => card.name === teaCardOption);
   const takeGrams = takeCard.map(grams => grams.grams).join("");
-  total.allGrams = takeGrams;
+  return takeGrams;
 }
 
-function getGramsFromField() {
-  total.takeGrams = this.value;
+function getGramsFromField(event) {
+  console.log(event.this.value);
 }
 
 function sumOrder() {
-  CHECK.innerHTML = total.takeGrams * total.allGrams;
+  let firstOperand = getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
+  let secondOperand = getGramsFromField(this.value);
+  console.log(secondOperand);
 }
 
 RECEIVE_GRAMMS.addEventListener("change", getGramsFromField, false);

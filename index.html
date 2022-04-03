@@ -8,44 +8,57 @@
 </head>
 <body>
     <div class="container">
-        <div class="content">
-            <div class="form">
-                <div id="selectors">
-                    <select name="" id="select-tea">
-                    </select>
+        <form class="form">
+            <h1>Оформление покупки</h1>
+            <div class="form__item">
+                <label for="product__choise">Выбор товара</label>
+                <select id="select__tea">
+                    <option value="Дун-Дин">Дун-Дин</option>
+                    <option value="Дун-Дин">Дун-Дин</option>
+                    <option value="Дун-Дин">Дун-Дин</option>
+                    <option value="Дун-Дин">Дун-Дин</option>
+                    <option value="Дун-Дин">Дун-Дин</option>
+                </select>
+                <small class="item__comment">Дожен быть выбран</small>
+            </div>
+            <div class="form__item">
+                <label for="product__description">Описание товара</label>
+                <div class="product__description__card">
+                    <div class="product__item">
+                        <div class="product__text">Название:</div>
+                        <div class="product__text">Дун-Дин</div>
+                    </div>
+                    <div class="product__item">
+                        <div class="product__text">Год:</div>
+                        <div class="product__text">2015</div>
+                    </div>
+                    <div class="product__item">
+                        <div class="product__text">Цена за грамм:</div>
+                        <div class="product__text">31</div>
+                    </div>
+                    <div class="product__item">
+                        <div class="product__text">Остаток в граммах:</div>
+                        <div class="product__text">350</div>
+                    </div>
                 </div>
             </div>
-            <div class="product__cart">
-                <div class="product__info">
-                    <div class="product__year">
-                        <div class="div__product__text">Год:</div>
-                        <div class="div__product__text">0</div>
-                    </div>
-                    <div class="product__remainder">
-                        <div class="div__product__text">Остаток в граммах:</div>
-                        <div class="div__product__text">0</div>
-                    </div>
-                    <div class="product__price">
-                        <div class="div__product__text">Цена за грамм:</div>
-                        <div class="div__product__text">0</div>
-                    </div>
-                    <div class="product__category">
-                        <div class="div__product__text">Категория</div>
-                        <div class="div__product__text">0</div>
-                    </div>
+            <div class="form__item">
+                <label for="">Колличество в граммах</label>
+                <div class="grams__slider">
+                    <div class="slider__item"></div>
                 </div>
             </div>
-            <div class="product__total__price">
-                <input type="number" placeholder="Колличество грамм">
-            </div>
-            <div class="product__to__pay">
-                <button>Рассчет</button>
-                <div class="product__text__total">
-                    Итого к оплате:
+            <div class="form__item">
+                <div class="input__item">
+                    <input type="text" class="from">
+                    <input type="text" class="to">
                 </div>
             </div>
-        </div>
+            <div class="form__item">
+                <button>Оплатить</button>
+            </div>
+        </form>
     </div>
-    <script src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
 </body>
 </html>
