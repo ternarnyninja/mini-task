@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1225px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.content {
+  display: inline-block;
+  background-color: bisque;
+  box-shadow: 5px 5px 5px rgb(114, 113, 113);
+}
+
+.form {
+}
+
+select {
+  font-size: 20px;
+  border: none;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(252, 197, 129);
+}
+
+.product__info {
+  padding: 115px 5px 0px 5px;
+}
+
+.product__year {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin: 0px 0px 10px 0px;
+}
+
+.product__price {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin: 0px 0px 10px 0px;
+}
+
+.product__remainder {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin: 0px 0px 10px 0px;
+}
+
+.product__category {
+  margin: 0px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+.div__product__text {
+  font-size: 20px;
+}
+
+.product__total__price {
+  padding: 35px 0px 0px 0px;
+}
+
+input {
+  border: none;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  padding: 5px;
+  margin: 0px 0px 15px 0px;
+  background-color: rgb(252, 197, 129);
+}
+
+button {
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  padding: 5px;
+  background-color: rgb(252, 197, 129);
+}
+
+.product__to__pay {
+  font-size: 20px;
+  padding: 25px 5px 5px 5px;
+}
