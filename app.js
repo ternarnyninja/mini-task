@@ -1,4 +1,6 @@
-let tea = [
+const SELECTOR = document.getElementById("select-tea");
+const TEA_INFO = document.querySelector(".product__info");
+const TEA_DATA = [
   
   { 
     name: "Выберите позицию",
@@ -38,85 +40,78 @@ let tea = [
   },
 
 ];
+const RECEIVE_GRAMMS = document.querySelector("input");
+const BTN = document.querySelector("button");
+const CHECK = document.querySelector(".product__text__total");
 
+function renderOptions(arrayOfObjects) {
+  const optionsList = arrayOfObjects
+    .map(optionName => {
+      return `<option id="${optionName.id}" value="${optionName.name}">${optionName.name}</option>`    
+  }).join(" ");
 
-let select = document.getElementById("select-tea");
-let btn = document.querySelector("button");
-let out = document.querySelector(".product__info");
-let tCost = document.querySelector(".product__text__total");
-let input = document.querySelector("input");
-
-function renderOptions(arr) {
-  let options = arr.map(item => `<option id="${item.id}" value="${item.name}">${item.name}</option>`).join(" ");
-  select.innerHTML = options;
+  SELECTOR.innerHTML = optionsList;
 }
 
-renderOptions(tea);
+renderOptions(TEA_DATA);
 
-select.addEventListener("change", () => {
-  // debugger;
-  checkOpiton();
-});
+// Надо как-то оптимизировать
 
-
-function setInfo(array, el) {
-  let info = array.filter(item => item.name === el);
-  let renderInfo = info.map(item => {
+function setInfo(arrayOfObjects, currentOption) {
+  const teaCardInfo = arrayOfObjects
+    .filter(teaSort => teaSort.name === currentOption);
+  const teaInfo = teaCardInfo
+    .map(teaFaeture => {
     return `<div class="product__year">
     <div class="div__product__text">Год:</div>
-    <div class="div__product__text">${item.year}</div>
+    <div class="div__product__text">${teaFaeture.year}</div>
     </div>
     <div class="product__remainder">
     <div class="div__product__text">Остаток в граммах:</div>
-    <div class="div__product__text">${item.grams}</div>
+    <div class="div__product__text">${teaFaeture.grams}</div>
     </div>
     <div class="product__price">
     <div class="div__product__text">Цена за грамм:</div>
-    <div class="div__product__text">${item.price}</div>
+    <div class="div__product__text">${teaFaeture.price}</div>
     </div>
     <div class="product__category">
     <div class="div__product__text">Категория</div>
-    <div class="div__product__text">${item.category}</div>
+    <div class="div__product__text">${teaFaeture.category}</div>
     </div>`
   });
-  out.innerHTML = renderInfo;
+  TEA_INFO.innerHTML = teaInfo;
 }
+
+let total = {};
 
 function checkOpiton() {
+  setInfo(TEA_DATA, SELECTOR.value);
+  getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
+};
 
-  switch(select.value) {
-
-    case "Выберите позицию":
-      console.log(123);
-      break;
-
-    case "Дун-Дин":
-      setInfo(tea, select.value);
-      calculateCost(tea, select.value, add);
-      break;
-
-    case "Шен-пуэр": 
-      setInfo(tea, select.value);
-      break;
-
-    case "Шу-пуэр": 
-      setInfo(tea, select.value);
-      break;
-    
-    case "Габа-оренж":
-      setInfo(tea, select.value);
-      break;
-  }
-
+function getGramsFromTeaCard(teaCard, teaCardOption) {
+  const takeCard = teaCard.filter(card => card.name === teaCardOption);
+  const takeGrams = takeCard.map(grams => grams.grams).join("");
+  total.allGrams = takeGrams;
 }
 
-
-function calculateCost(array, teaPos, cal) {
-  let itemPrice = array.filter(el => el.name === teaPos);
-  let price = itemPrice.map(item => item.price).join("");
-  cal(price);
+function getGramsFromField() {
+  total.takeGrams = this.value;
 }
 
+function sumOrder() {
+  CHECK.innerHTML = total.takeGrams * total.allGrams;
+}
+
+RECEIVE_GRAMMS.addEventListener("change", getGramsFromField, false);
+
+SELECTOR.addEventListener("change", () => {
+  checkOpiton();
+});
+
+BTN.addEventListener("click", () => {
+  sumOrder();
+});
 
 
 
