@@ -6,11 +6,12 @@
 
 h1 {
   text-align: center;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 label {
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 html, body {
@@ -43,6 +44,11 @@ select {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   margin: 5px 0 0;
+  padding: 5px;
+}
+
+select:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .form__item {
@@ -76,14 +82,28 @@ select {
 }
 
 .input__item {
+  font-size: 20px;
   display: flex;
   justify-content: space-between;
 }
 
+
 input {
+  width: 100%;
+  display: inline-block;
   text-align: center;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 0 0 0 3px;
+  padding: 5px;
+} 
+
+input::placeholder {
+  transform: translateX(-55px);
+}
+
+input:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 small {
@@ -96,4 +116,8 @@ button {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: #fff;
+}
+
+button:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }

@@ -1,11 +1,9 @@
-"use scritct";
-
-const SELECTOR = document.getElementById("select__tea");
-const TEA_CARD = document.querySelector(".product__description__card");
-const TEA_DATA = [
+let SELECTOR = document.getElementById("select__tea");
+let TEA_CARD = document.querySelector(".product__description__card");
+let TEA_DATA = [
   
   { 
-    name: "Выберите позицию",
+    name: "Выберите товар",
   }, 
 
   { 
@@ -19,37 +17,43 @@ const TEA_DATA = [
 
   { 
     id: 2,
+    year: 2018,
     name: "Шен-пуэр",
     grams: 350,
     price: 23,
-  
+    category: "AA+"
   },
 
   { 
     id: 3,
+    year: 2019,
     name: "Шу-пуэр",
     grams: 250,
     price: 21,
+    category: "A"
 
   },
 
   {
     id: 4,
-    name: "Габа-оренж",
+    year: 2021,
+    name: "Габа-оранж",
     grams: 330,
     price: 18,
-
+    category: "AA+"
   },
 
 ];
-const RECEIVE_GRAMMS = document.querySelector("input");
-const BTN = document.querySelector("button");
-const CHECK = document.querySelector(".product__text__total");
-const SET__INPUT__VALUE = document.querySelector(".input__item");
-const form = document.querySelector(".form");
+let RECEIVE_GRAMMS = document.querySelector(".input__from");
+let BTN = document.querySelector("button");
+let CHECK = document.querySelector(".product__text__total");
+let inputGrams = document.querySelector(".from");
+let SET__INPUT__VALUE = document.querySelector(".to");
+let form = document.querySelector(".form");
+let BAD__MESSAGE = document.querySelector(".slider__bad__message");
 
 function renderOptions(arrayOfObjects) {
-  const optionsList = arrayOfObjects
+  let optionsList = arrayOfObjects
     .map(optionName => {
       return `<option id="${optionName.id}" value="${optionName.name}">${optionName.name}</option>`    
   }).join(" ");
@@ -59,15 +63,13 @@ function renderOptions(arrayOfObjects) {
 
 renderOptions(TEA_DATA);
 
-// Надо как-то оптимизировать
-
 function checkAvailability(teainfo) {
   return teainfo === undefined ? "Неизвестно" : teainfo;
 }
 
 function setInfo(arrayOfObjects, currentOption) {
-  const teaCardInfo = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
-  const teaInfo = teaCardInfo.map(teaFaeture => {
+  let teaCardInfo = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
+  let teaInfo = teaCardInfo.map(teaFaeture => {
     return `<div class="product__item">
               <div class="product__text">Название:</div>
               <div class="product__text">${checkAvailability(teaFaeture.name)}</div>
@@ -87,54 +89,40 @@ function setInfo(arrayOfObjects, currentOption) {
   });
 
   TEA_CARD.innerHTML = teaInfo;
-  setGramsOnInput(arrayOfObjects, currentOption);
 }
 
 function setGramsOnInput(arrayOfObjects, currentOption){
-  const takeCurrentOption = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
-  const setValue = takeCurrentOption.map(totalGrams => {
-    return `От:<input type="text" class="from" value="0">
-            До:<input type="text" class="to" value="${totalGrams.grams}">`;
-  });
-  SET__INPUT__VALUE.innerHTML = setValue;
-};
-
-let total = {};
-
-function checkOpiton() {
-  setInfo(TEA_DATA, SELECTOR.value);
+  let takeCurrentOption = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
+  let setValue = takeCurrentOption[0].grams;
+  SET__INPUT__VALUE.value = setValue ;
 };
 
 function getGramsFromTeaCard(teaCard, teaCardOption) {
-  const takeCard = teaCard.filter(card => card.name === teaCardOption);
-  const takeGrams = takeCard.map(grams => grams.grams).join("");
+  let takeCard = teaCard.filter(card => card.name === teaCardOption);
+  let takeGrams = takeCard.map(grams => grams.grams).join("");
   return takeGrams;
 }
 
-function getGramsFromField() {
-  console.log(this.value);
+function compareGrums(gramsValue) {
+  if (Number(gramsValue) > getGramsFromTeaCard(TEA_DATA, SELECTOR.value)) {
+    BAD__MESSAGE.style.color = "red";
+  } else {
+    BAD__MESSAGE.style.color = "white";
+  }
+  if (gramsValue === "") {
+    BAD__MESSAGE.style.color = "white";
+  }
+
 }
 
-function sumOrder() {
-  let firstOperand = getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
-  let secondOperand = getGramsFromField(this.value);
-  console.log(firstOperand);
-  console.log(secondOperand);
-}
-
-RECEIVE_GRAMMS.addEventListener("change", () => {
-  console.log(Number(RECEIVE_GRAMMS.value));
+inputGrams.addEventListener("input", () => {
+  compareGrums(inputGrams.value);
 });
 
-console.log(RECEIVE_GRAMMS);
 
 SELECTOR.addEventListener("change", () => {
-  checkOpiton();
-});
-
-BTN.addEventListener("click", () => {
-  // sumOrder();
-  event.preventDefault();
+  setInfo(TEA_DATA, SELECTOR.value)
+  setGramsOnInput(TEA_DATA, SELECTOR.value);
 });
 
 

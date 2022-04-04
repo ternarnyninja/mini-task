@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <title>D</title>
 </head>
 <body>
     <div class="container">
         <form class="form">
             <h1>Оформление покупки</h1>
             <div class="form__item">
-                <label for="product__choise">Выбор товара:</label>
                 <select id="select__tea">
                     
                 </select>
@@ -22,19 +22,19 @@
                 <div class="product__description__card">
                     <div class="product__item">
                         <div class="product__text">Название:</div>
-                        <div class="product__text">0</div>
+                        <div class="product__text"></div>
                     </div>
                     <div class="product__item">
                         <div class="product__text">Год:</div>
-                        <div class="product__text">0</div>
+                        <div class="product__text"></div>
                     </div>
                     <div class="product__item">
                         <div class="product__text">Цена за грамм:</div>
-                        <div class="product__text">0</div>
+                        <div class="product__text"></div>
                     </div>
                     <div class="product__item">
                         <div class="product__text">Остаток в граммах:</div>
-                        <div class="product__text">0</div>
+                        <div class="product__text"></div>
                     </div>
                 </div>
                 <small>Есть в наличи</small>
@@ -44,14 +44,13 @@
                 <div class="grams__slider">
                     <div class="slider__item"></div>
                 </div>
-                <small>Есть в наличи</small>
             </div>
             <div class="form__item">
                 <div class="input__item">
-                    От:<input type="text" class="from" value="0">
-                    До:<input type="text" class="to" value="350">
+                    <input type="text" class="from" value="" placeholder="От:">
+                    <input type="text" class="to" value="" placeholder="До:">
                 </div>
-                <small>Есть в наличи</small>
+                <small class="slider__bad__message">Нет нужного колличества</small>
             </div>
             <div class="form__item">
                 <button>Оплатить</button>
