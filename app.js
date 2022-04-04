@@ -1,5 +1,7 @@
-const SELECTOR = document.getElementById("select-tea");
-const TEA_INFO = document.querySelector(".product__info");
+"use scritct";
+
+const SELECTOR = document.getElementById("select__tea");
+const TEA_CARD = document.querySelector(".product__description__card");
 const TEA_DATA = [
   
   { 
@@ -43,6 +45,8 @@ const TEA_DATA = [
 const RECEIVE_GRAMMS = document.querySelector("input");
 const BTN = document.querySelector("button");
 const CHECK = document.querySelector(".product__text__total");
+const SET__INPUT__VALUE = document.querySelector(".input__item");
+const form = document.querySelector(".form");
 
 function renderOptions(arrayOfObjects) {
   const optionsList = arrayOfObjects
@@ -57,36 +61,48 @@ renderOptions(TEA_DATA);
 
 // Надо как-то оптимизировать
 
-function setInfo(arrayOfObjects, currentOption) {
-  const teaCardInfo = arrayOfObjects
-    .filter(teaSort => teaSort.name === currentOption);
-  const teaInfo = teaCardInfo
-    .map(teaFaeture => {
-    return `<div class="product__year">
-    <div class="div__product__text">Год:</div>
-    <div class="div__product__text">${teaFaeture.year}</div>
-    </div>
-    <div class="product__remainder">
-    <div class="div__product__text">Остаток в граммах:</div>
-    <div class="div__product__text">${teaFaeture.grams}</div>
-    </div>
-    <div class="product__price">
-    <div class="div__product__text">Цена за грамм:</div>
-    <div class="div__product__text">${teaFaeture.price}</div>
-    </div>
-    <div class="product__category">
-    <div class="div__product__text">Категория</div>
-    <div class="div__product__text">${teaFaeture.category}</div>
-    </div>`
-  });
-  TEA_INFO.innerHTML = teaInfo;
+function checkAvailability(teainfo) {
+  return teainfo === undefined ? "Неизвестно" : teainfo;
 }
+
+function setInfo(arrayOfObjects, currentOption) {
+  const teaCardInfo = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
+  const teaInfo = teaCardInfo.map(teaFaeture => {
+    return `<div class="product__item">
+              <div class="product__text">Название:</div>
+              <div class="product__text">${checkAvailability(teaFaeture.name)}</div>
+            </div>
+            <div class="product__item">
+              <div class="product__text">Год:</div>
+              <div class="product__text">${checkAvailability(teaFaeture.year)}</div>
+            </div>
+            <div class="product__item">
+              <div class="product__text">Цена за грамм:</div>
+              <div class="product__text">${checkAvailability(teaFaeture.price)}</div>
+            </div>
+            <div class="product__item">
+              <div class="product__text">Остаток в граммах:</div>
+              <div class="product__text">${checkAvailability(teaFaeture.grams)}</div>
+            </div>`
+  });
+
+  TEA_CARD.innerHTML = teaInfo;
+  setGramsOnInput(arrayOfObjects, currentOption);
+}
+
+function setGramsOnInput(arrayOfObjects, currentOption){
+  const takeCurrentOption = arrayOfObjects.filter(teaSort => teaSort.name === currentOption);
+  const setValue = takeCurrentOption.map(totalGrams => {
+    return `От:<input type="text" class="from" value="0">
+            До:<input type="text" class="to" value="${totalGrams.grams}">`;
+  });
+  SET__INPUT__VALUE.innerHTML = setValue;
+};
 
 let total = {};
 
 function checkOpiton() {
   setInfo(TEA_DATA, SELECTOR.value);
-  // getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
 };
 
 function getGramsFromTeaCard(teaCard, teaCardOption) {
@@ -95,24 +111,30 @@ function getGramsFromTeaCard(teaCard, teaCardOption) {
   return takeGrams;
 }
 
-function getGramsFromField(event) {
-  console.log(event.this.value);
+function getGramsFromField() {
+  console.log(this.value);
 }
 
 function sumOrder() {
   let firstOperand = getGramsFromTeaCard(TEA_DATA, SELECTOR.value);
   let secondOperand = getGramsFromField(this.value);
+  console.log(firstOperand);
   console.log(secondOperand);
 }
 
-RECEIVE_GRAMMS.addEventListener("change", getGramsFromField, false);
+RECEIVE_GRAMMS.addEventListener("change", () => {
+  console.log(Number(RECEIVE_GRAMMS.value));
+});
+
+console.log(RECEIVE_GRAMMS);
 
 SELECTOR.addEventListener("change", () => {
   checkOpiton();
 });
 
 BTN.addEventListener("click", () => {
-  sumOrder();
+  // sumOrder();
+  event.preventDefault();
 });
 
 
